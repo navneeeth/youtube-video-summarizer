@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Video Summary App</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about/index.html">About</a></li>
+        </ul>
+    </nav>
+    <h1>YouTube Video Summarizer</h1>
+    <section>
+        <h2>How it Works</h2>
+        <p>
+            This app provides a summary of a YouTube video using OpenAI's Whisper API (speech-to-text transcription) and GPT-3.5 (for summarizing the text). To use this app, enter the link to the YouTube video and your OpenAI API key, and then click on "Preview Video". After previewing the video, click on "Continue" to start the transcription process. The summary will be displayed once the transcription is complete.
+        </p>
+        <h3>How to Sign Up for an OpenAI Account</h3>
+        <ol>
+            <li>Go to the OpenAI website for API Keys (<a href="https://platform.openai.com/account/api-keys" target="_blank">https://platform.openai.com/account/api-keys</a>).</li>
+            <li>Login/Create Account with OpenAI.</li>
+            <li>Follow the instructions to create an account and obtain your API key.</li>
+        </ol>
+    </section>
+    <form>
+        <label for="video-link">YouTube Video Link:</label>
+        <input type="text" id="video-link" name="video-link"><br><br>
+        <label for="openai-id">OpenAI API Key:</label>
+        <input type="text" id="openai-id" name="openai-id"><br><br>
+        <input type="button" value="Preview Video" onclick="previewVideo()">
+    </form>
+
+    <div id="video-preview" style="display: none;">
+        <iframe id="video-iframe" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        <h2 id="video-title"></h2>
+        <button id = "goBack" onclick="goBack()">Go Back</button>
+        <input type="button" id = "continueProcess" value="Continue" onclick="continueProcess()">
+    </div>
+
+    <div id="status" style="display: none;">
+        <h2>Status:</h2>
+        <p id="status-text"></p>
+    </div>
+
+    <div id="result" style="display: none;">
+        <h2>Summary:</h2>
+        <p id="result-text"></p>
+    </div>
+
+    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2023 YouTube Video Summarizer. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

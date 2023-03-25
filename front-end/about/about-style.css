@@ -1,0 +1,69 @@
+/* navigation menu */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  
+  /* navigation menu */
+  nav a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    /* add the following */
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  nav a:hover {
+    color: #666;
+  }
+  
+  /* app header */
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+  
+  /* about section */
+  .about {
+    margin-bottom: 30px;
+  }
+  
+  .about h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+  
+  .about p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  /* screenshots section */
+  .screenshots {
+    margin-bottom: 30px;
+  }
+  
+  .screenshots h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+  
+  .screenshots img {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  

@@ -1,0 +1,8 @@
+flask
+firebase_admin
+moviepy
+pytube
+openai
+flask_cors
+gunicorn
+validators

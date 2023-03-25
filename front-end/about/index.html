@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - YouTube Video Summarizer</title>
+    <link rel="stylesheet" href="about-style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./../index.html">Home</a></li>
+                <li><a href="index.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about">
+            <h1>About</h1>
+            <p>Hello! This app was built using HTML, CSS, Python Flask, and JS by <a href="https://www.padaki-n.com">Navneeth Krishna</a>. The app allows you to generate summaries for YouTube videos using OpenAI's Whisper API (speech-to-text transcription) and GPT-3.5 (summary completion).</p>
+            <p>The app interacts with a Flask server hosted on Heroku. The frontend and backend communicate via REST APIs. The launch of GPT-4 motivated me to build this product and I plan on optimizing API costs using wave processing and other techniques. In addition, I plan on skipping transcribing for videos with readily available subtitles which will further save costs.</p>
+            <p>I used GPT-3.5-turbo for this instead of GPT-4 for the former's cost-effective usage. </p>
+            <p>Be aware of the pricing of the Whisper API and gpt-3.5-turbo Chat Completion API <a href="https://openai.com/pricing" target="_blank">here</a>. In general, the Whisper API accumulates costs quickly. gpt-3.5-turbo is quite affordable.</p>
+            <p>Note that the library for downloading YouTube videos--PyTube has a bunch of errors which may lead to errors in processing.</p>
+            <p>The Backend Stack/Tech: Whisper API, GPT-3.5-turbo, Python Flask, Firebase NoSQL real-time database (Cloud Firestore), RESTful API, and pytube. </p>
+            <p>The Frontend Stack/Tech: HTML, CSS, and JS.</p>
+        <section class="screenshots">
+            <h2>Screenshots</h2>
+            <img src="./screenshots/page1.png" alt="Screenshot 1">
+            <img src="./screenshots/page2.png" alt="Screenshot 2">
+            <img src="./screenshots/page3.png" alt="Screenshot 3">
+            <img src="./screenshots/page4.png" alt="Screenshot 4">
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 YouTube Video Summarizer. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
