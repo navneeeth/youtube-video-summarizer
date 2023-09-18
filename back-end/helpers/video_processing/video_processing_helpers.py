@@ -47,10 +47,28 @@ def update_processing_status(acknowledgement_id, timestamp, video_link, video_ti
     except Exception as e:
         print("Error:", e)
 
+def remove_any_mp3_files():
+    """
+    Remove all .mp3 files in the current directory.
+    """
+    # Get the current directory
+    current_directory = os.getcwd()
+
+    # List all files in the current directory
+    file_list = os.listdir(current_directory)
+
+    # Iterate through the files and delete .mp3 files
+    for file in file_list:
+        if file.endswith(".mp3"):
+            file_path = os.path.join(current_directory, file)
+            os.remove(file_path)
+
 def process_request(new_id, timestamp, video_link, video_title):
     print('Started thread')
     print(threading.current_thread().name)
     try:
+        remove_any_mp3_files()
+        
         # Update status to 'Downloading'
         update_processing_status(new_id, timestamp, video_link, video_title, '', 'Downloading')
         
@@ -84,14 +102,14 @@ def process_request(new_id, timestamp, video_link, video_title):
         os.remove(video_title+"_summary.txt")
         os.remove(video_title+"_transcription.txt")
         os.remove(video_file)
-        os.remove(audio_file)
+        #os.remove(audio_file)
     
     except Exception as e:
         print("Error:", e)
         # Update status to 'Error'
         update_processing_status(new_id, timestamp, video_link, video_title, '', 'Error')
         return
-    active_threads.stop()
+    #active_threads.stop()
     
 def process_request_legacy(new_id, timestamp, video_link, video_title):
     print('Started thread')
@@ -137,7 +155,7 @@ def process_request_legacy(new_id, timestamp, video_link, video_title):
     os.remove(video_title+"_transcription.txt")
     os.remove(video_file)
     os.remove(audio_file)
-    active_threads.stop()
+    #active_threads.stop()
     
     
 

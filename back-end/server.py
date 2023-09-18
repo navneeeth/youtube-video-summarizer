@@ -13,6 +13,7 @@ import requests
 from flask_cors import CORS
 from validators import url as is_valid_url
 from controllers.id.id_controller import route_get_id
+from controllers.status.status_controller import route_get_status
 from config import db
 
 app = Flask(__name__)
@@ -129,6 +130,9 @@ def hello():
 app.add_url_rule('/get-id', methods=['POST'], view_func=route_get_id)
 
 # Route to get the status of the processing task
+app.add_url_rule('/get-status', methods=['POST'], view_func=route_get_status)
+
+'''
 @app.route('/get-status', methods=['POST'])
 def get_status():
     # Get the acknowledgment ID from the JSON request
@@ -143,6 +147,7 @@ def get_status():
     return jsonify({
         'status': status
     })
+'''
 
 # Route to get the summary of the processed task
 @app.route('/get-summary', methods=['POST'])
