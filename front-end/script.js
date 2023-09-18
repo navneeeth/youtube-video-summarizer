@@ -1,4 +1,5 @@
-const apiUrl = "https://yt-video-summarizer-backend.herokuapp.com";
+//const apiUrl = "https://yt-video-summarizer-backend.herokuapp.com";
+const apiUrl = "http://127.0.0.1:5000";
 var formattedTitle = '';
 function previewVideo() {
     const videoLink = document.getElementById("video-link").value;

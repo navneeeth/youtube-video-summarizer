@@ -12,17 +12,48 @@ import threading
 import requests
 from flask_cors import CORS
 from validators import url as is_valid_url
-
+from controllers.id.id_controller import route_get_id
+from config import db
 
 app = Flask(__name__)
 CORS(app)
 MAX_THREADS = 5
 active_threads = []
 
+'''
 # Initialize Firebase credentials and Firestore client
-cred = credentials.Certificate('videosummarizergpt.json')
+cred = credentials.Certificate('assets/videosummarizergpt.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
+'''
+
+def get_id():
+    request_data = request.get_json()
+    timestamp = request_data.get('timestamp')
+    video_link = request_data.get('videoLink')
+    video_title = request_data.get('videoTitle')
+    acknowledgement_id = None
+
+    while not acknowledgement_id:
+        # Generate a random 15-character ID with numbers and letters
+        new_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=15))
+
+        # Check if the ID already exists in the Firestore collection
+        id_doc = db.collection('auth').document(new_id).get()
+        if not id_doc.exists:
+            # If the ID is unique, store it in the Firestore collection
+            db.collection('auth').document(new_id).set({'timestamp': timestamp, 'status': 'Acknowledged', 'video_link': video_link, 'video_title': video_title, 'summary': ''})
+            acknowledgement_id = new_id
+    #data = [new_id, timestamp, video_link, video_title]
+    start_processing(new_id, timestamp, video_link, video_title)
+    # Return the acknowledgement ID to the user
+    print(acknowledgement_id)
+    return jsonify({
+        'ack_id': acknowledgement_id,
+        'status': 'success'
+    })
+    
+
 
 def process_request(new_id, timestamp, video_link, video_title):
     print('Started thread')
@@ -31,7 +62,7 @@ def process_request(new_id, timestamp, video_link, video_title):
     video_file = video_title + ".mp4"
     audio_file = video_title + ".mp3"
     updated_audio_file = "updated_" + audio_file
-    youtube = YouTube(video_link)
+    youtube = YouTube(video_link, use_oauth=True, allow_oauth_cache=True)
     print(youtube)
     audio = youtube.streams.filter(only_audio=True).first()
     audio.download(filename=video_file)
@@ -93,34 +124,9 @@ def add_header(response):
 @app.route('/')
 def hello():
     return "Hello!"
-@app.route('/get-id', methods=['POST'])
-def get_id():
-    request_data = request.get_json()
-    timestamp = request_data.get('timestamp')
-    video_link = request_data.get('videoLink')
-    video_title = request_data.get('videoTitle')
-    acknowledgement_id = None
 
-    while not acknowledgement_id:
-        # Generate a random 15-character ID with numbers and letters
-        new_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=15))
 
-        # Check if the ID already exists in the Firestore collection
-        id_doc = db.collection('auth').document(new_id).get()
-        if not id_doc.exists:
-            # If the ID is unique, store it in the Firestore collection
-            db.collection('auth').document(new_id).set({'timestamp': timestamp, 'status': 'Acknowledged', 'video_link': video_link, 'video_title': video_title, 'summary': ''})
-            acknowledgement_id = new_id
-    #data = [new_id, timestamp, video_link, video_title]
-    start_processing(new_id, timestamp, video_link, video_title)
-    # Return the acknowledgement ID to the user
-    print(acknowledgement_id)
-    return jsonify({
-        'ack_id': acknowledgement_id,
-        'status': 'success'
-    })
-    
-
+app.add_url_rule('/get-id', methods=['POST'], view_func=route_get_id)
 
 # Route to get the status of the processing task
 @app.route('/get-status', methods=['POST'])

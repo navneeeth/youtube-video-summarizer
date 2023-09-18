@@ -1,0 +1,6 @@
+language: python
+name: back-end
+packages:
+- path: helpers
+- path: controllers
+- path: models
