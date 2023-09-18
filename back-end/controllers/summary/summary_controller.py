@@ -1,8 +1,8 @@
 from flask import request, jsonify
-from helpers.status.status_helpers import *
-from models.status.status_model import Status
+from helpers.summary.summary_helpers import *
+from models.summary.summary_model import Summary
 
-def route_get_status():
+def route_get_summary():
     request_data = request.get_json()
     
     # Validate the request data
@@ -12,21 +12,23 @@ def route_get_status():
     
     # Get the acknowledgment ID from the JSON request
     ack_id = request_data.get('ackId')
-
+    
     # Create an instance of the Status class
-    status_obj = Status(ack_id, '')
+    summary_obj = Summary(ack_id, '')
     
     # Call the function to retrieve and update the status
-    status_obj = get_status_from_db(status_obj)
+    summary_obj = get_summary_from_db(summary_obj)
     
     # Check if the status is an error message
-    if 'Error' in status_obj.status:
-        return jsonify({'status': 'error', 'message': status_obj.status})
+    if 'Error' in summary_obj.summary:
+        return jsonify({'status': 'error', 'message': summary_obj.summary})
 
     # Access the updated status
-    status = status_obj.status
+    summary = summary_obj.summary
 
     # Return the status
     return jsonify({
-        'status': status
-    })
+        'status': 'success',
+        'message': summary
+    })    
+    

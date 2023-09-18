@@ -14,6 +14,7 @@ from flask_cors import CORS
 from validators import url as is_valid_url
 from controllers.id.id_controller import route_get_id
 from controllers.status.status_controller import route_get_status
+from controllers.summary.summary_controller import route_get_summary
 from config import db
 
 app = Flask(__name__)
@@ -132,39 +133,8 @@ app.add_url_rule('/get-id', methods=['POST'], view_func=route_get_id)
 # Route to get the status of the processing task
 app.add_url_rule('/get-status', methods=['POST'], view_func=route_get_status)
 
-'''
-@app.route('/get-status', methods=['POST'])
-def get_status():
-    # Get the acknowledgment ID from the JSON request
-    data = request.get_json()
-    ack_id = data.get('ackId')
-
-    # Retrieve the status from Firebase
-    doc_ref = db.collection(u'auth').document(ack_id)
-    status = doc_ref.get().to_dict()['status']
-
-    # Return the status
-    return jsonify({
-        'status': status
-    })
-'''
-
 # Route to get the summary of the processed task
-@app.route('/get-summary', methods=['POST'])
-def get_summary():
-    # Get the acknowledgment ID from the JSON request
-    data = request.get_json()
-    ack_id = data.get('ackId')
-    
-    # Retrieve the status from Firebase
-    doc_ref = db.collection(u'auth').document(ack_id)
-    summary = doc_ref.get().to_dict()['summary']
-    
-    # Return the status
-    return jsonify({
-        'status': 'success',
-        'message': summary
-    })
+app.add_url_rule('/get-summary', methods=['POST'], view_func=route_get_summary)
 
 @app.route('/validate-openai-id', methods=['POST'])
 def validate_openai_id():
