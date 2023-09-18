@@ -12,4 +12,4 @@ Check the app out at: https://padaki-n.com/youtube-video-summarizer/
 Directory| Description
 --- | ---
 front-end | Contains the code for the front-end hosted [here](https://padaki-n.com/youtube-video-summarizer/). The *scipt.js* contains the JavaScript logic for processing the front-end in *index.html* styled with *style.css*. |
-back-end | Contains the code (*server.py*) for the back-end logic to process RESTful API requests with error-handling from the front-end to validate input, interact with the Cloud Firestore NoSQL database, download the video, convert to audio, audio transcription, and summarization. We connect to Firebase by creating an API Key as a JSON file named *videosummarizergpt.json*.
+back-end | Contains the code (*server.py*) for the back-end logic to process RESTful API requests with error-handling from the front-end to validate input, interact with the Cloud Firestore NoSQL database, download the video, convert to audio, audio transcription, and summarization. We connect to Firebase by creating an API Key as a JSON file named *videosummarizergpt.json*. The backend follows a Model-Controller approach in handling the routes.  
