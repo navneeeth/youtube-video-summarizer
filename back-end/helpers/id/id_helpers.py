@@ -1,14 +1,7 @@
-from firebase_admin import credentials, firestore
-import firebase_admin
 from flask import jsonify
 import random
 import string
 from config import db
-
-# Initialize Firebase credentials and Firestore client
-#cred = credentials.Certificate('assets/videosummarizergpt.json')
-#firebase_admin.initialize_app(cred)
-#db = firestore.client()
 
 def generate_random_id(length=15):
     """

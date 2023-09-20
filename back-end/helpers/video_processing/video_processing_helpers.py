@@ -3,18 +3,12 @@ import os
 import openai
 import moviepy.editor as mp
 from pytube import YouTube
-from firebase_admin import credentials, initialize_app, firestore
 from models.id.id_model import ID
 from helpers.id.id_helpers import store_id
 from config import db
 
 MAX_THREADS = 5
 active_threads = []
-
-# Initialize Firebase credentials and Firestore client
-#cred = credentials.Certificate('assets/videosummarizergpt.json')
-#initialize_app(cred)
-#db = firestore.client()
 
 def download_video(audio_file, video_file, video_link):
     youtube = YouTube(video_link, use_oauth=True, allow_oauth_cache=True)
